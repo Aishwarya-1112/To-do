@@ -1,46 +1,31 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const Todo = () => {
-  const [list, setList] = useState("");
+  const [list, setList] = useState([]); // Initialize list as an empty array
   const [data, setData] = useState("");
 
-  const listItems = useRef();
-
-  const addListItems = () => {
-    if (!list) {
-      alert("Enter the value");
-    }
-    {
-      setData([...data, list]);
-      setList("");
-    }
-    const remove = (index) => {
-      const deleteData = data.filter(
-        (listItems, indexItem) => indexItem !== index
-      );
-    };
+  const addList = () => {
+    setList((prevList) => [...prevList, data]);
+    setData("");
   };
 
   return (
     <>
       <div>
-        <form>
-          <input
-            ref={listItems}
-            type="text"
-            value={list}
-            onChange={(e) => setList(e.target.value)}
-          />
-          <button onClick={addListItems}>Add</button>
-        </form>
-
-        <ul>
-          {data.map((curreItem, index) => {
-            return <li>{curreItem}</li>;
-          })}
-        </ul>
+        <input
+          type="text"
+          value={data}
+          onChange={(e) => {
+            setData(e.target.value);
+          }}
+        />
+        <button onClick={addList}>Add</button>
+        {list.map((item, index) => (
+          <p key={index}>{item}</p>
+        ))}
       </div>
     </>
   );
 };
+
 export default Todo;
