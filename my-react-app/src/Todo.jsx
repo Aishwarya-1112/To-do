@@ -13,15 +13,23 @@ const Todo = () => {
     <>
       <div>
         <input
+          className="border -2 border-orange-800"
           type="text"
           value={data}
           onChange={(e) => {
             setData(e.target.value);
           }}
         />
-        <button onClick={addList}>Add</button>
+        <button
+          className="border -2 border-orange-800 , p-5 , m-8"
+          onClick={addList}
+        >
+          Add
+        </button>
         {list.map((item, index) => (
-          <p key={index}>{item}</p>
+          <ul>
+            <li key={index}>{item}</li>
+          </ul>
         ))}
       </div>
     </>
